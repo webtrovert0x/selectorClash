@@ -13,7 +13,7 @@ import { SELECTOR_CLASH_REGISTRY_ABI } from '../contracts/SelectorClashRegistryA
 import { keccak256, toHex, Address, isAddress } from 'viem';
 import { X, CheckCircle2, AlertTriangle, ExternalLink, Loader2, Zap } from 'lucide-react';
 import { ExtractedSelector, SelectorCollision } from '../utils/selectorExtractor';
-import { botchainTestnet } from '../config/botchain';
+import { botchainMainnet } from '../config/botchain';
 
 interface RecordAuditModalProps {
   isOpen: boolean;
@@ -69,7 +69,7 @@ export function RecordAuditModal({
   const rawContract = (contractAddress || customContract).trim();
   const isValidContract = isAddress(rawContract);
   const activeContract = isValidContract ? (rawContract as Address) : undefined;
-  const isWrongChain = isConnected && chain && chain.id !== botchainTestnet.id;
+  const isWrongChain = isConnected && chain && chain.id !== botchainMainnet.id;
 
   const handleRecordAudit = async () => {
     if (!activeContract) {
@@ -137,7 +137,7 @@ export function RecordAuditModal({
           </div>
           <div>
             <h2 className="text-base font-semibold text-zinc-100 font-mono">
-              Record Audit on Botchain Testnet
+              Record Audit on Botchain Mainnet
             </h2>
             <p className="text-xs text-zinc-400 font-mono">
               Stores permanent collision verification to SelectorClashRegistry
@@ -154,7 +154,7 @@ export function RecordAuditModal({
             </span>
           </div>
           <p className="text-zinc-400">
-            This on-chain transaction only consumes network gas in <span className="text-zinc-200 font-medium">BOT</span> on Botchain Testnet (Chain ID 968). There are zero protocol taxes, developer surcharges, or hidden fees.
+            This on-chain transaction only consumes network gas in <span className="text-zinc-200 font-medium">BOT</span> on Botchain Mainnet (Chain ID 677). There are zero protocol taxes, developer surcharges, or hidden fees.
           </p>
         </div>
 
@@ -166,7 +166,7 @@ export function RecordAuditModal({
               SelectorClashRegistry Contract Not Deployed Yet
             </div>
             <p className="text-zinc-400 mb-2 leading-relaxed">
-              To record on-chain audits on Botchain Testnet (Chain ID 968), add your deployer <code className="text-zinc-200">PRIVATE_KEY</code> in <code className="text-zinc-200">.env</code> and run <code className="text-zinc-200">npm run deploy:contract</code>, or paste an already deployed contract address below:
+              To record on-chain audits on Botchain Mainnet (Chain ID 677), add your deployer <code className="text-zinc-200">PRIVATE_KEY</code> in <code className="text-zinc-200">.env</code> and run <code className="text-zinc-200">npm run deploy:contract</code>, or paste an already deployed contract address below:
             </p>
             <div className="flex gap-2">
               <input
@@ -274,14 +274,19 @@ export function RecordAuditModal({
               )}
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-zinc-500">BohrScan Explorer:</span>
+              <span className="text-zinc-500">BotchainScan Explorer:</span>
               <a
-                href={`https://scan.bohr.life/tx/${txHash}`}
+                href={`https://scan.botchain.ai/tx/${txHash}`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-zinc-300 hover:text-zinc-100 flex items-center gap-1 underline"
+                className="text-zinc-300 hover:text-zinc-100 flex items-center gap-1.5 underline"
               >
-                {txHash.slice(0, 10)}...{txHash.slice(-8)}
+                <img
+                  src="/botchain-logo.png"
+                  alt="BotchainScan"
+                  className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                />
+                <span>{txHash.slice(0, 10)}...{txHash.slice(-8)}</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -304,11 +309,11 @@ export function RecordAuditModal({
           <div className="mb-4 p-3 rounded-lg bg-amber-950/40 border border-amber-800 flex items-center justify-between">
             <span className="text-xs font-mono text-amber-300">Connected to wrong network:</span>
             <button
-              onClick={() => switchChain?.({ chainId: botchainTestnet.id })}
+              onClick={() => switchChain?.({ chainId: botchainMainnet.id })}
               disabled={isSwitching}
               className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-mono text-xs font-bold rounded transition-colors"
             >
-              Switch to Botchain (968)
+              Switch to Botchain (677)
             </button>
           </div>
         ) : null}

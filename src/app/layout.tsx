@@ -8,7 +8,7 @@ import { ErrorBoundary } from '../components/ErrorBoundary';
 export const metadata: Metadata = {
   title: 'SelectorClash — Function Selector Collision Detector',
   description:
-    'Detect 4-byte function selector collisions in Solidity ABIs, ERC-1967 Transparent Proxies, and ERC-2535 Diamonds on Botchain Testnet.',
+    'Detect 4-byte function selector collisions in Solidity ABIs, ERC-1967 Transparent Proxies, and ERC-2535 Diamonds on Botchain Mainnet.',
   icons: {
     icon: '/icon.svg',
   },
@@ -36,25 +36,58 @@ export default function RootLayout({
             </main>
             <footer className="border-t border-zinc-800 py-6 text-center text-xs text-zinc-500 font-mono">
               <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <div>
-                  SelectorClash • Function Selector Collision Detector on Botchain Testnet (Chain ID 968)
+                <div className="flex items-center gap-2">
+                  <img
+                    src="/selectorclash-logo.svg"
+                    alt="SelectorClash"
+                    className="w-4 h-4 rounded object-contain"
+                  />
+                  <span>
+                    SelectorClash • Solidity Function Selector Collision Detector on Botchain Mainnet (677)
+                  </span>
                 </div>
-                <div className="flex items-center gap-4 text-zinc-400">
+                <div className="flex flex-wrap items-center gap-4 text-zinc-400">
                   <a
-                    href="https://scan.bohr.life"
+                    href="https://www.botchain.ai"
                     target="_blank"
                     rel="noreferrer"
-                    className="hover:text-zinc-200 transition-colors"
+                    className="hover:text-zinc-200 transition-colors flex items-center gap-1.5"
+                    title="Official Botchain Website"
                   >
-                    BohrScan
+                    <img
+                      src="/botchain-logo.png"
+                      alt="Botchain Official Logo"
+                      className="w-3.5 h-3.5 rounded-full object-contain"
+                    />
+                    <span>Botchain.ai</span>
                   </a>
                   <a
-                    href="https://rpc.bohr.life"
+                    href="https://scan.botchain.ai"
                     target="_blank"
                     rel="noreferrer"
-                    className="hover:text-zinc-200 transition-colors"
+                    className="hover:text-zinc-200 transition-colors flex items-center gap-1.5"
+                    title="Official BotchainScan Explorer"
                   >
-                    RPC
+                    <img
+                      src="/botchain-logo.png"
+                      alt="BotchainScan Logo"
+                      className="w-3.5 h-3.5 rounded-full object-contain"
+                    />
+                    <span>BotchainScan</span>
+                  </a>
+                  <a
+                    href="https://rpc.botchain.ai"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-zinc-200 transition-colors flex items-center gap-1.5"
+                    title="Official Botchain RPC Endpoint"
+                  >
+                    <img
+                      src="/botchain-logo.png"
+                      alt="Botchain RPC"
+                      className="w-3.5 h-3.5 rounded-full object-contain"
+                    />
+                    <span>RPC (677)</span>
                   </a>
                   <span className="text-zinc-600">Gas Fee Only (BOT)</span>
                 </div>

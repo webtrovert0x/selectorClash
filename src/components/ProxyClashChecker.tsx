@@ -9,7 +9,7 @@ import { ExtractedSelector, SelectorCollision } from '../utils/selectorExtractor
 
 export function ProxyClashChecker() {
   const [proxyAddress, setProxyAddress] = useState('');
-  const [rpcUrl, setRpcUrl] = useState('https://rpc.bohr.life');
+  const [rpcUrl, setRpcUrl] = useState('https://rpc.botchain.ai');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<ProxyInspectionResult | null>(null);
   const [showRecordModal, setShowRecordModal] = useState(false);
@@ -46,7 +46,7 @@ export function ProxyClashChecker() {
           </h2>
         </div>
         <p className="text-xs text-zinc-400 mb-4">
-          Reads standard EIP-1967 storage slots on Botchain Testnet to verify implementation, admin, and beacon routing, and cross-checks against reserved proxy selectors.
+          Reads standard EIP-1967 storage slots on Botchain Mainnet to verify implementation, admin, and beacon routing, and cross-checks against reserved proxy selectors.
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -65,7 +65,7 @@ export function ProxyClashChecker() {
               type="text"
               value={rpcUrl}
               onChange={(e) => setRpcUrl(e.target.value)}
-              placeholder="RPC URL (default: https://rpc.bohr.life)"
+              placeholder="RPC URL (default: https://rpc.botchain.ai)"
               className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-xs font-mono text-zinc-400 focus:outline-none focus:border-zinc-600"
             />
           </div>
@@ -129,12 +129,17 @@ export function ProxyClashChecker() {
                   </div>
                   {result.implementationAddress ? (
                     <a
-                      href={`https://scan.bohr.life/address/${result.implementationAddress}`}
+                      href={`https://scan.botchain.ai/address/${result.implementationAddress}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-bold underline"
+                      className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5 font-bold underline"
                     >
-                      {result.implementationAddress}
+                      <img
+                        src="/botchain-logo.png"
+                        alt="BotchainScan"
+                        className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                      />
+                      <span>{result.implementationAddress}</span>
                       <ExternalLink className="w-3 h-3 text-zinc-500" />
                     </a>
                   ) : (
@@ -149,12 +154,17 @@ export function ProxyClashChecker() {
                   </div>
                   {result.adminAddress ? (
                     <a
-                      href={`https://scan.bohr.life/address/${result.adminAddress}`}
+                      href={`https://scan.botchain.ai/address/${result.adminAddress}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-zinc-200 hover:text-zinc-100 flex items-center gap-1 underline"
+                      className="text-zinc-200 hover:text-zinc-100 flex items-center gap-1.5 underline"
                     >
-                      {result.adminAddress}
+                      <img
+                        src="/botchain-logo.png"
+                        alt="BotchainScan"
+                        className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                      />
+                      <span>{result.adminAddress}</span>
                       <ExternalLink className="w-3 h-3 text-zinc-500" />
                     </a>
                   ) : (
@@ -169,12 +179,17 @@ export function ProxyClashChecker() {
                   </div>
                   {result.beaconAddress ? (
                     <a
-                      href={`https://scan.bohr.life/address/${result.beaconAddress}`}
+                      href={`https://scan.botchain.ai/address/${result.beaconAddress}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-zinc-200 hover:text-zinc-100 flex items-center gap-1 underline"
+                      className="text-zinc-200 hover:text-zinc-100 flex items-center gap-1.5 underline"
                     >
-                      {result.beaconAddress}
+                      <img
+                        src="/botchain-logo.png"
+                        alt="BotchainScan"
+                        className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                      />
+                      <span>{result.beaconAddress}</span>
                       <ExternalLink className="w-3 h-3 text-zinc-500" />
                     </a>
                   ) : (

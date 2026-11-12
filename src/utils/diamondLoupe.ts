@@ -1,5 +1,5 @@
 import { createPublicClient, http, Address } from 'viem';
-import { botchainTestnet } from '../config/botchain';
+import { botchainMainnet } from '../config/botchain';
 
 export const DIAMOND_LOUPE_ABI = [
   {
@@ -61,10 +61,10 @@ export interface DiamondInspectionResult {
 
 export async function inspectDiamondOnChain(
   diamondAddress: string,
-  rpcUrl: string = 'https://rpc.bohr.life'
+  rpcUrl: string = 'https://rpc.botchain.ai'
 ): Promise<DiamondInspectionResult> {
   const client = createPublicClient({
-    chain: botchainTestnet,
+    chain: botchainMainnet,
     transport: http(rpcUrl),
   });
 

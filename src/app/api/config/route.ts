@@ -56,8 +56,8 @@ export async function GET() {
   return NextResponse.json({
     reownId,
     contractAddress,
-    chainId: 968,
-    rpcUrl: 'https://rpc.bohr.life',
-    explorerUrl: 'https://scan.bohr.life',
+    chainId: 677,
+    rpcUrl: 'https://rpc.botchain.ai',
+    explorerUrl: 'https://scan.botchain.ai',
   });
 }

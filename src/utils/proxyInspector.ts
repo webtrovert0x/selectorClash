@@ -1,5 +1,5 @@
 import { createPublicClient, http, Address, hexToBigInt } from 'viem';
-import { botchainTestnet } from '../config/botchain';
+import { botchainMainnet } from '../config/botchain';
 
 // Standard EIP-1967 storage slots
 export const EIP1967_IMPLEMENTATION_SLOT =
@@ -21,10 +21,10 @@ export interface ProxyInspectionResult {
 
 export async function inspectProxyOnChain(
   proxyAddress: string,
-  rpcUrl: string = 'https://rpc.bohr.life'
+  rpcUrl: string = 'https://rpc.botchain.ai'
 ): Promise<ProxyInspectionResult> {
   const client = createPublicClient({
-    chain: botchainTestnet,
+    chain: botchainMainnet,
     transport: http(rpcUrl),
   });
 

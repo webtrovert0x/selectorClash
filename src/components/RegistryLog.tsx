@@ -135,12 +135,18 @@ export function RegistryLog() {
             <span>Contract Address:</span>
             {contractAddress ? (
               <a
-                href={`https://scan.bohr.life/address/${contractAddress}`}
+                href={`https://scan.botchain.ai/address/${contractAddress}`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-zinc-200 hover:text-zinc-100 underline flex items-center gap-1"
+                className="text-zinc-200 hover:text-zinc-100 underline flex items-center gap-1.5"
+                title="View Contract on BotchainScan"
               >
-                {contractAddress}
+                <img
+                  src="/botchain-logo.png"
+                  alt="BotchainScan"
+                  className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                />
+                <span>{contractAddress}</span>
                 <ExternalLink className="w-3 h-3 text-zinc-500" />
               </a>
             ) : (
@@ -237,7 +243,7 @@ export function RegistryLog() {
                             <span className="text-zinc-500">Raw ABI / Unlinked</span>
                           ) : (
                             <a
-                              href={`https://scan.bohr.life/address/${item.targetContract}`}
+                              href={`https://scan.botchain.ai/address/${item.targetContract}`}
                               target="_blank"
                               rel="noreferrer"
                               className="underline hover:text-zinc-100 flex items-center gap-1"
@@ -270,7 +276,7 @@ export function RegistryLog() {
                         </td>
                         <td className="py-2.5 text-zinc-400">
                           <a
-                            href={`https://scan.bohr.life/address/${item.submitter}`}
+                            href={`https://scan.botchain.ai/address/${item.submitter}`}
                             target="_blank"
                             rel="noreferrer"
                             className="hover:text-zinc-200"
@@ -341,7 +347,7 @@ export function RegistryLog() {
                         </td>
                         <td className="py-2.5 text-zinc-400">
                           <a
-                            href={`https://scan.bohr.life/address/${item.reporter}`}
+                            href={`https://scan.botchain.ai/address/${item.reporter}`}
                             target="_blank"
                             rel="noreferrer"
                             className="hover:text-zinc-200"

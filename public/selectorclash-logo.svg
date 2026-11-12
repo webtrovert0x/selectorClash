@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer Shield / Rounded Container -->
+  <rect width="200" height="200" rx="44" fill="#09090b" />
+  <rect x="2" y="2" width="196" height="196" rx="42" stroke="#27272a" stroke-width="2" />
+  <rect x="10" y="10" width="180" height="180" rx="36" stroke="#18181b" stroke-width="1" />
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="clashGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#d4d4d8" />
+      <stop offset="100%" stop-color="#71717a" />
+    </linearGradient>
+    <linearGradient id="facetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#27272a" />
+      <stop offset="100%" stop-color="#121215" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Facet Block (Selector A) -->
+  <path d="M45 70 L92 42 L92 124 L45 150 Z" fill="url(#facetGrad)" stroke="#52525b" stroke-width="2" />
+  <path d="M45 70 L92 42 L112 55 L65 83 Z" fill="#18181b" stroke="#3f3f46" stroke-width="1.5" />
+
+  <!-- Right Facet Block (Selector B - Clashing) -->
+  <path d="M155 70 L108 42 L108 124 L155 150 Z" fill="url(#facetGrad)" stroke="#52525b" stroke-width="2" />
+  <path d="M155 70 L108 42 L88 55 L135 83 Z" fill="#18181b" stroke="#3f3f46" stroke-width="1.5" />
+
+  <!-- Collision Energy Vector / Lightning -->
+  <path d="M101 32 L91 92 L108 92 L94 158 L115 84 L99 84 Z" fill="url(#clashGlow)" />
+
+  <!-- 4-Byte Hex Matrix Dots -->
+  <circle cx="68" cy="110" r="2.5" fill="#a1a1aa" />
+  <circle cx="132" cy="110" r="2.5" fill="#a1a1aa" />
+
+  <!-- Label -->
+  <text x="100" y="180" text-anchor="middle" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#a1a1aa" letter-spacing="2.5">SELECTORCLASH</text>
+</svg>
+

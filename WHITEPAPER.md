@@ -1,8 +1,15 @@
+<p align="center">
+  <img src="public/selectorclash-logo.svg" alt="SelectorClash Logo" width="110" height="110" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="public/botchain-logo.png" alt="Official Botchain Logo" width="110" height="110" />
+</p>
+
 # SelectorClash: Algorithmic Function Selector Collision Detection & On-Chain Verification Registry for Modular and Upgradeable EVM Architectures
 
 **Whitepaper v1.0.0**  
-**Network:** Botchain Testnet (Chain ID: 968)  
-**Deployed Smart Contract:** [`0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8`](https://scan.bohr.life/address/0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8)  
+**Network:** Botchain Mainnet (Chain ID: 677)  
+**Deployed Smart Contract:** [`0x376e716d512cbcc36db30fa396ccfb145daa2839`](https://scan.botchain.ai/address/0x376e716d512cbcc36db30fa396ccfb145daa2839)  
+**Deployment Tx:** [`0xe12001a39aaa9805e9e4530e333b690d9a322206c429af499d834e0835e36d3c`](https://scan.botchain.ai/tx/0xe12001a39aaa9805e9e4530e333b690d9a322206c429af499d834e0835e36d3c)  
 **Native Currency:** BOT (Gas Fee Only Architecture)  
 **Repository:** [https://github.com/webtrovert0x/selectorClash](https://github.com/webtrovert0x/selectorClash)  
 
@@ -14,7 +21,7 @@ In Ethereum Virtual Machine (EVM) execution environments, function dispatching r
 
 In monolithic Solidity contracts, the compiler prohibits duplicate internal selectors. However, in contemporary modular systems—such as **ERC-1967 Transparent & UUPS Proxies** and **ERC-2535 Diamond Multi-Facet Architectures**—function dispatching is bifurcated or decoupled across separate contracts. This structural separation creates a critical vulnerability: an implementation function can intentionally or accidentally shadow a proxy admin function (the "Tincho attack vector"), or two facets can collide, leading to unexpected transaction hijacking, state corruption, or privilege escalation.
 
-**SelectorClash** is a comprehensive, production-grade security suite and decentralized registry deployed on **Botchain Testnet (Chain ID: 968)**. It provides pre-deployment canonical ABI selector extraction, cross-facet collision verification, on-chain ERC-1967 storage slot inspection, ERC-2535 Diamond Loupe validation, and an immutable decentralized registry (`SelectorClashRegistry.sol`) operating strictly under a **Gas Fee Only** model with zero protocol surcharges.
+**SelectorClash** is a comprehensive, production-grade security suite and decentralized registry deployed on **Botchain Mainnet (Chain ID: 677)**. It provides pre-deployment canonical ABI selector extraction, cross-facet collision verification, on-chain ERC-1967 storage slot inspection, ERC-2535 Diamond Loupe validation, and an immutable decentralized registry (`SelectorClashRegistry.sol`) operating strictly under a **Gas Fee Only** model with zero protocol surcharges.
 
 ---
 
@@ -94,7 +101,7 @@ Because each facet contract is compiled in isolation by the Solidity compiler:
 
 SelectorClash provides a three-layer defense matrix:
 1. **Pre-deployment Canonical Analysis Engine** (Client-side).
-2. **On-chain State Inspector** for Botchain Testnet (EIP-1967 and ERC-2535).
+2. **On-chain State Inspector** for Botchain Mainnet (EIP-1967 and ERC-2535).
 3. **Decentralized Verification & Audit Registry** (`SelectorClashRegistry.sol`).
 
 ```mermaid
@@ -109,10 +116,10 @@ flowchart TD
         A1 --> A2 --> A3 --> A4 --> A5 --> A6
     end
 
-    subgraph OnChain ["Botchain Testnet (Chain ID: 968)"]
+    subgraph OnChain ["Botchain Mainnet (Chain ID: 677)"]
         B1["EIP-1967 Storage Slots<br/>(Implementation, Admin, Beacon)"]
         B2["ERC-2535 Diamond Loupe<br/>(facets(), facetAddresses())"]
-        B3["SelectorClashRegistry.sol<br/>(0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8)"]
+        B3["SelectorClashRegistry.sol<br/>(0x376e716d512cbcc36db30fa396ccfb145daa2839)"]
     end
 
     A6 --> B3
@@ -131,14 +138,14 @@ SelectorClash enforces the strict EIP-712 / ABI canonical specification:
 - Computes canonical `bytes4(keccak256(canonicalString))`.
 
 ### 4.2 On-Chain Storage Slot & Loupe Inspection
-For contracts already deployed on **Botchain Testnet**, SelectorClash performs direct RPC queries (`https://rpc.bohr.life`):
+For contracts already deployed on **Botchain Mainnet**, SelectorClash performs direct RPC queries (`https://rpc.botchain.ai`):
 - **EIP-1967 Implementation Slot**: `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`
 - **EIP-1967 Admin Slot**: `0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103`
 - **EIP-1967 Beacon Slot**: `0xa3f0ad74e5423aebfd80d3ef4346578335a9a72aeaee59ff6cb3582b35133d50`
 - **ERC-2535 Diamond Loupe**: Calls `facets()` on the target address to reconstruct the live selector-to-facet routing matrix and report active collisions.
 
 ### 4.3 Decentralized Registry (`SelectorClashRegistry.sol`)
-The on-chain smart contract is deployed on Botchain Testnet at address [`0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8`](https://scan.bohr.life/address/0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8).
+The on-chain smart contract is deployed on Botchain Mainnet at address [`0x376e716d512cbcc36db30fa396ccfb145daa2839`](https://scan.botchain.ai/address/0x376e716d512cbcc36db30fa396ccfb145daa2839).
 
 #### Key Functions:
 ```solidity
@@ -171,7 +178,7 @@ function getRecentReports(uint256 limit) external view returns (CollisionReport[
 
 SelectorClash is designed as public-good security infrastructure:
 1. **Zero Protocol Fees**: All contract functions are non-payable (`msg.value == 0`). No protocol surcharges, developer cuts, or subscription models exist.
-2. **Network Gas Fee in Native Token (`BOT`)**: Transactions consume only the bare minimum EVM gas required for state updates on Botchain Testnet.
+2. **Network Gas Fee in Native Token (`BOT`)**: Transactions consume only the bare minimum EVM gas required for state updates on Botchain Mainnet.
 3. **No Hidden Paywalls**: Analysis, multi-facet comparisons, and database lookups run client-side for maximum speed and zero cost.
 
 ---
@@ -180,12 +187,12 @@ SelectorClash is designed as public-good security infrastructure:
 
 | Parameter | Specification |
 |:---|:---|
-| **Target Blockchain** | Botchain Testnet (Bohr) |
-| **Chain ID** | `968` |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | `https://scan.bohr.life` |
+| **Target Blockchain** | Botchain Mainnet |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | `https://scan.botchain.ai` |
 | **Native Token** | `BOT` (18 decimals) |
-| **Registry Contract** | `0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8` |
+| **Registry Contract** | `0x376e716d512cbcc36db30fa396ccfb145daa2839` |
 | **Solidity Compiler** | `0.8.24` (EVM target: `cancun`) |
 | **Frontend Framework** | Next.js 14 App Router, React 18, TypeScript |
 | **Web3 Layer** | Viem v2, Wagmi v2, Reown AppKit (@reown/appkit-adapter-wagmi) |
@@ -203,6 +210,6 @@ SelectorClash is designed as public-good security infrastructure:
 
 ## 8. Conclusion
 
-As smart contract ecosystems evolve from monolithic codebases toward modular, upgradeable proxy and diamond systems, the 4-byte function selector collision vector transitions from a mathematical curiosity into a severe threat. **SelectorClash** eliminates this attack surface by unifying pre-deployment algorithmic analysis, live on-chain storage and loupe inspection, and decentralized record-keeping on **Botchain Testnet**.
+As smart contract ecosystems evolve from monolithic codebases toward modular, upgradeable proxy and diamond systems, the 4-byte function selector collision vector transitions from a mathematical curiosity into a severe threat. **SelectorClash** eliminates this attack surface by unifying pre-deployment algorithmic analysis, live on-chain storage and loupe inspection, and decentralized record-keeping on **Botchain Mainnet**.
 
-*Verified on Botchain Testnet • Gas Fee Only • Zero Protocol Fees*
+*Verified on Botchain Mainnet • Gas Fee Only • Zero Protocol Fees*

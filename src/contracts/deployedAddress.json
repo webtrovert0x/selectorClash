@@ -1,6 +1,9 @@
 {
-  "address": "0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8",
-  "chainId": 968,
-  "deployedAt": "2026-11-01T05:02:37.271Z",
-  "txHash": "0x70e5ab8fc323d7bc777a9b84d8b27ef70e88100d6f515f2f2979c967128702cd"
+  "address": "0x376e716d512cbcc36db30fa396ccfb145daa2839",
+  "chainId": 677,
+  "network": "Botchain Mainnet",
+  "rpcUrl": "https://rpc.botchain.ai",
+  "explorerUrl": "https://scan.botchain.ai",
+  "deployedAt": "2026-11-12T07:41:29.826Z",
+  "txHash": "0xe12001a39aaa9805e9e4530e333b690d9a322206c429af499d834e0835e36d3c"
 }

@@ -33,7 +33,14 @@ export default function Home() {
             </h1>
             <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-2xl">
               Extract 4-byte selectors, identify hash collisions, verify Diamond (ERC-2535) facet overlap, detect Transparent Proxy admin interception, and record verified audits on{' '}
-              <span className="text-zinc-200 font-medium">Botchain Testnet</span>.
+              <span className="inline-flex items-center gap-1 text-zinc-200 font-medium">
+                <img
+                  src="/botchain-logo.png"
+                  alt="Botchain Official Logo"
+                  className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                />
+                Botchain Mainnet
+              </span>.
             </p>
           </div>
 

@@ -1,10 +1,16 @@
+<p align="center">
+  <img src="public/selectorclash-logo.svg" alt="SelectorClash Logo" width="110" height="110" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="public/botchain-logo.png" alt="Official Botchain Logo" width="110" height="110" />
+</p>
+
 # SelectorClash — Function Selector Collision Detector
 
-> **Algorithmic 4-Byte Function Selector Collision Detection & On-Chain Verification Registry for Modular and Upgradeable EVM Architectures on Botchain Testnet.**
+> **Algorithmic 4-Byte Function Selector Collision Detection & On-Chain Verification Registry for Modular and Upgradeable EVM Architectures on Botchain Mainnet.**
 
-[![Network: Botchain Testnet](https://img.shields.io/badge/Network-Botchain%20Testnet%20(968)-zinc?style=flat-square&logo=ethereum)](https://scan.bohr.life)
-[![Contract](https://img.shields.io/badge/Contract-0xce4f...fee8-emerald?style=flat-square)](https://scan.bohr.life/address/0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8)
-[![Fee Policy](https://img.shields.io/badge/Fee%20Policy-Gas%20Fee%20Only%20(BOT)-zinc?style=flat-square)](https://scan.bohr.life)
+[![Network: Botchain Mainnet](https://img.shields.io/badge/Network-Botchain%20Mainnet%20(677)-zinc?style=flat-square&logo=ethereum)](https://scan.botchain.ai)
+[![Contract](https://img.shields.io/badge/Contract-0x376e...2839-emerald?style=flat-square)](https://scan.botchain.ai/address/0x376e716d512cbcc36db30fa396ccfb145daa2839)
+[![Fee Policy](https://img.shields.io/badge/Fee%20Policy-Gas%20Fee%20Only%20(BOT)-zinc?style=flat-square)](https://scan.botchain.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-zinc?style=flat-square)](LICENSE)
 
 ---
@@ -19,22 +25,22 @@ While monolithic contracts prevent duplicate names at compile time, modern upgra
 - **ERC-1967 Transparent Proxies**: An implementation function can collide with an administrative function (e.g. `upgradeTo`, `admin`, `proxy_owner`), allowing callers or admins to unintentionally trigger proxy administrative logic rather than implementation code (the **Tincho attack vector**).
 - **ERC-2535 Diamond Multi-Facet Systems**: Independent facet contracts can contain overlapping selectors, silently overriding routing tables during `diamondCut`.
 
-**SelectorClash** eliminates this attack surface by providing pre-deployment static analysis, live on-chain storage and Loupe inspection on **Botchain Testnet**, and a decentralized, **Gas Fee Only** verification registry.
+**SelectorClash** eliminates this attack surface by providing pre-deployment static analysis, live on-chain storage and Loupe inspection on **Botchain Mainnet**, and a decentralized, **Gas Fee Only** verification registry.
 
 ---
 
-## Live Deployment (Botchain Testnet)
+## Live Deployment (Botchain Mainnet)
 
-The core verification contract [`SelectorClashRegistry.sol`](./contracts/SelectorClashRegistry.sol) is live on **Botchain Testnet (Chain ID: 968)**:
+The core verification contract [`SelectorClashRegistry.sol`](./contracts/SelectorClashRegistry.sol) is live on **Botchain Mainnet (Chain ID: 677)**:
 
 | Property | Value |
 |:---|:---|
-| **Contract Address** | [`0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8`](https://scan.bohr.life/address/0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8) |
-| **Deployment Tx Hash** | [`0x70e5ab8fc323d7bc777a9b84d8b27ef70e88100d6f515f2f2979c967128702cd`](https://scan.bohr.life/tx/0x70e5ab8fc323d7bc777a9b84d8b27ef70e88100d6f515f2f2979c967128702cd) |
-| **Chain ID** | `968` |
-| **Network Name** | Botchain Testnet (Bohr) |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | [https://scan.bohr.life](https://scan.bohr.life) |
+| **Contract Address** | [`0x376e716d512cbcc36db30fa396ccfb145daa2839`](https://scan.botchain.ai/address/0x376e716d512cbcc36db30fa396ccfb145daa2839) |
+| **Deployment Tx Hash** | [`0xe12001a39aaa9805e9e4530e333b690d9a322206c429af499d834e0835e36d3c`](https://scan.botchain.ai/tx/0xe12001a39aaa9805e9e4530e333b690d9a322206c429af499d834e0835e36d3c) |
+| **Chain ID** | `677` |
+| **Network Name** | Botchain Mainnet |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
 | **Native Gas Token** | `BOT` (18 Decimals) |
 | **Fee Policy** | **Gas Fee Only** (`msg.value == 0`, zero protocol surcharges) |
 
@@ -50,12 +56,12 @@ The core verification contract [`SelectorClashRegistry.sol`](./contracts/Selecto
 - **Proxy Clashing Detection**: Cross-checks implementation functions against standard ERC-1967 / UUPS reserved selectors (`upgradeTo`, `admin`, `changeAdmin`, `proxy_owner`, etc.).
 
 ### 2. 💎 ERC-2535 Diamond Loupe Inspector
-- Connects directly to **Botchain Testnet** via RPC (`https://rpc.bohr.life`).
+- Connects directly to **Botchain Mainnet** via RPC (`https://rpc.botchain.ai`).
 - Queries `IDiamondLoupe.facets()` on any live Diamond contract address.
 - Inspects facet routing tables and flags active selector overlaps across facets.
 
 ### 3. 🛡️ ERC-1967 Proxy Dispatcher Checker
-- Reads live storage slots directly on Botchain Testnet:
+- Reads live storage slots directly on Botchain Mainnet:
   - **Implementation Slot**: `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`
   - **Admin Slot**: `0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103`
   - **Beacon Slot**: `0xa3f0ad74e5423aebfd80d3ef4346578335a9a72aeaee59ff6cb3582b35133d50`
@@ -88,8 +94,8 @@ The core verification contract [`SelectorClashRegistry.sol`](./contracts/Selecto
                 └───────────┬────────────┘
                             │
               ┌─────────────▼─────────────┐
-              │   Botchain Testnet (968)  │
-              │   RPC: rpc.bohr.life      │
+              │   Botchain Mainnet (677)  │
+              │   RPC: rpc.botchain.ai    │
               │   Token: BOT              │
               └─────────────┬─────────────┘
                             │
@@ -119,11 +125,11 @@ The core verification contract [`SelectorClashRegistry.sol`](./contracts/Selecto
 ### Prerequisites
 - Node.js $\ge$ 18.17.0
 - npm $\ge$ 9.0.0
-- Web3 Wallet (MetaMask, Rabby, or WalletConnect-compatible wallet) configured for **Botchain Testnet**:
-  - **RPC URL**: `https://rpc.bohr.life`
-  - **Chain ID**: `968`
+- Web3 Wallet (MetaMask, Rabby, or WalletConnect-compatible wallet) configured for **Botchain Mainnet**:
+  - **RPC URL**: `https://rpc.botchain.ai`
+  - **Chain ID**: `677`
   - **Symbol**: `BOT`
-  - **Explorer**: `https://scan.bohr.life`
+  - **Explorer**: `https://scan.botchain.ai`
 
 ### 1. Clone & Install Dependencies
 ```bash
@@ -143,11 +149,11 @@ Edit `.env`:
 # Reown AppKit Project ID (from https://cloud.reown.com)
 REOWN_ID=your_reown_project_id
 
-# Botchain Testnet Private Key for Contract Deployment
+# Botchain Mainnet Private Key for Contract Deployment
 PRIVATE_KEY=your_private_key_here
 
-# Deployed SelectorClashRegistry Contract Address on Botchain Testnet
-SELECTOR_CLASH_REGISTRY_ADDRESS=0xce4fe8e5d4f41df7adde93ec32b251ba0189fee8
+# Deployed SelectorClashRegistry Contract Address on Botchain Mainnet
+SELECTOR_CLASH_REGISTRY_ADDRESS=0x376e716d512cbcc36db30fa396ccfb145daa2839
 ```
 
 > **Security Note**: `REOWN_ID` and `PRIVATE_KEY` are kept strictly private on the server side in `.env` and are never exposed in public build bundles.
@@ -158,7 +164,7 @@ To recompile or redeploy `SelectorClashRegistry.sol`:
 # Compile contract using native Solc
 npm run compile:contract
 
-# Deploy to Botchain Testnet (Chain ID 968) using Viem
+# Deploy to Botchain Mainnet (Chain ID 677) using Viem
 npm run deploy:contract
 ```
 

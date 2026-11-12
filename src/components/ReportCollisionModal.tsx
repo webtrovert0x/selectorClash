@@ -13,7 +13,7 @@ import { SELECTOR_CLASH_REGISTRY_ABI } from '../contracts/SelectorClashRegistryA
 import { computeSelector, canonicalizeSignatureString } from '../utils/selectorExtractor';
 import { Address, isAddress } from 'viem';
 import { X, AlertTriangle, ExternalLink, Loader2, CheckCircle2, ShieldAlert, Zap } from 'lucide-react';
-import { botchainTestnet } from '../config/botchain';
+import { botchainMainnet } from '../config/botchain';
 
 interface ReportCollisionModalProps {
   isOpen: boolean;
@@ -73,7 +73,7 @@ export function ReportCollisionModal({
   const rawContract = (contractAddress || customContract).trim();
   const isValidContract = isAddress(rawContract);
   const activeContract = isValidContract ? (rawContract as Address) : undefined;
-  const isWrongChain = isConnected && chain && chain.id !== botchainTestnet.id;
+  const isWrongChain = isConnected && chain && chain.id !== botchainMainnet.id;
 
   const handleReport = async () => {
     if (!activeContract) {
@@ -159,7 +159,7 @@ export function ReportCollisionModal({
             </span>
           </div>
           <p className="text-zinc-400">
-            Records your report to <span className="font-mono text-zinc-200">SelectorClashRegistry</span> on Botchain Testnet. Costs network gas fee only.
+            Records your report to <span className="font-mono text-zinc-200">SelectorClashRegistry</span> on Botchain Mainnet. Costs network gas fee only.
           </p>
         </div>
 
@@ -171,7 +171,7 @@ export function ReportCollisionModal({
               SelectorClashRegistry Contract Not Deployed Yet
             </div>
             <p className="text-zinc-400 mb-2 leading-relaxed">
-              To record collision reports on Botchain Testnet (Chain ID 968), add your deployer <code className="text-zinc-200">PRIVATE_KEY</code> in <code className="text-zinc-200">.env</code> and run <code className="text-zinc-200">npm run deploy:contract</code>, or paste an already deployed contract address below:
+              To record collision reports on Botchain Mainnet (Chain ID 677), add your deployer <code className="text-zinc-200">PRIVATE_KEY</code> in <code className="text-zinc-200">.env</code> and run <code className="text-zinc-200">npm run deploy:contract</code>, or paste an already deployed contract address below:
             </p>
             <div className="flex gap-2">
               <input
@@ -325,14 +325,19 @@ export function ReportCollisionModal({
               )}
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-zinc-500">Explorer:</span>
+              <span className="text-zinc-500">BotchainScan Explorer:</span>
               <a
-                href={`https://scan.bohr.life/tx/${txHash}`}
+                href={`https://scan.botchain.ai/tx/${txHash}`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-zinc-300 underline hover:text-zinc-100 flex items-center gap-1"
+                className="text-zinc-300 underline hover:text-zinc-100 flex items-center gap-1.5"
               >
-                {txHash.slice(0, 10)}...{txHash.slice(-8)}
+                <img
+                  src="/botchain-logo.png"
+                  alt="BotchainScan"
+                  className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                />
+                <span>{txHash.slice(0, 10)}...{txHash.slice(-8)}</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -355,11 +360,11 @@ export function ReportCollisionModal({
           <div className="mt-4 p-3 rounded-lg bg-amber-950/40 border border-amber-800 flex items-center justify-between">
             <span className="text-xs font-mono text-amber-300">Connected to wrong network:</span>
             <button
-              onClick={() => switchChain?.({ chainId: botchainTestnet.id })}
+              onClick={() => switchChain?.({ chainId: botchainMainnet.id })}
               disabled={isSwitching}
               className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-mono text-xs font-bold rounded transition-colors"
             >
-              Switch to Botchain (968)
+              Switch to Botchain (677)
             </button>
           </div>
         ) : null}

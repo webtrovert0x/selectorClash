@@ -2,9 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { createWalletClient, createPublicClient, http } from 'viem';
+import { createWalletClient, createPublicClient, http, defineChain } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { defineChain } from 'viem';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,9 +11,9 @@ const __dirname = path.dirname(__filename);
 // Load .env
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-const botchainTestnet = defineChain({
-  id: 968,
-  name: 'Botchain Testnet',
+const botchainMainnet = defineChain({
+  id: 677,
+  name: 'Botchain',
   nativeCurrency: {
     decimals: 18,
     name: 'BOT',
@@ -22,19 +21,19 @@ const botchainTestnet = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
     public: {
-      http: ['https://rpc.bohr.life'],
+      http: ['https://rpc.botchain.ai'],
     },
   },
   blockExplorers: {
     default: {
-      name: 'BohrScan',
-      url: 'https://scan.bohr.life',
+      name: 'BotchainScan',
+      url: 'https://scan.botchain.ai',
     },
   },
-  testnet: true,
+  testnet: false,
 });
 
 async function main() {
@@ -49,17 +48,17 @@ async function main() {
   const account = privateKeyToAccount(formattedKey);
 
   console.log(`Deployer Address: ${account.address}`);
-  console.log(`Connecting to Botchain Testnet (Chain ID 968)...`);
+  console.log(`Connecting to Botchain Mainnet (Chain ID 677)...`);
 
   const publicClient = createPublicClient({
-    chain: botchainTestnet,
-    transport: http('https://rpc.bohr.life'),
+    chain: botchainMainnet,
+    transport: http('https://rpc.botchain.ai'),
   });
 
   const walletClient = createWalletClient({
     account,
-    chain: botchainTestnet,
-    transport: http('https://rpc.bohr.life'),
+    chain: botchainMainnet,
+    transport: http('https://rpc.botchain.ai'),
   });
 
   const balance = await publicClient.getBalance({ address: account.address });
@@ -74,27 +73,28 @@ async function main() {
 
   const artifact = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
 
-  console.log('\nDeploying SelectorClashRegistry.sol to Botchain Testnet...');
+  console.log('\nDeploying SelectorClashRegistry.sol to Botchain Mainnet (Chain ID 677)...');
   const hash = await walletClient.deployContract({
     abi: artifact.abi,
     bytecode: artifact.bytecode,
   });
 
   console.log(`Deployment Transaction Hash: ${hash}`);
-  console.log(`Explorer Link: https://scan.bohr.life/tx/${hash}`);
+  console.log(`Explorer Link: https://scan.botchain.ai/tx/${hash}`);
   console.log('Waiting for transaction confirmation...');
 
   const receipt = await publicClient.waitForTransactionReceipt({ hash });
   const contractAddress = receipt.contractAddress;
 
-  console.log(`\n🎉 SelectorClashRegistry deployed successfully!`);
+  console.log(`\n🎉 SelectorClashRegistry deployed successfully on Botchain Mainnet!`);
   console.log(`Contract Address: ${contractAddress}`);
-  console.log(`Explorer Link: https://scan.bohr.life/address/${contractAddress}`);
+  console.log(`Explorer Link: https://scan.botchain.ai/address/${contractAddress}`);
 
   // Write to src/contracts/deployedAddress.json
   const deployedInfo = {
     address: contractAddress,
-    chainId: 968,
+    chainId: 677,
+    network: 'Botchain Mainnet',
     deployedAt: new Date().toISOString(),
     txHash: hash,
   };
@@ -122,4 +122,3 @@ main().catch((err) => {
   console.error('Deployment failed:', err);
   process.exit(1);
 });
-

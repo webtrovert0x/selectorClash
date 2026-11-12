@@ -7,7 +7,7 @@ import { injected, walletConnect } from 'wagmi/connectors';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 import { createAppKit } from '@reown/appkit/react';
 import { isAddress } from 'viem';
-import { botchainTestnet } from '../config/botchain';
+import { botchainMainnet, botchainTestnet } from '../config/botchain';
 
 interface AppConfigContextType {
   reownId: string;
@@ -41,7 +41,7 @@ function getOrCreateWagmiConfig(projectId: string) {
     try {
       const adapter = new WagmiAdapter({
         projectId: projectId.trim(),
-        networks: [botchainTestnet as any],
+        networks: [botchainMainnet as any, botchainTestnet as any],
         connectors: [
           injected(),
           walletConnect({ projectId: projectId.trim(), showQrModal: false }),
@@ -52,13 +52,13 @@ function getOrCreateWagmiConfig(projectId: string) {
       if (typeof window !== 'undefined' && !globalAppKitInstance) {
         globalAppKitInstance = createAppKit({
           adapters: [adapter],
-          networks: [botchainTestnet as any],
+          networks: [botchainMainnet as any, botchainTestnet as any],
           projectId: projectId.trim(),
           metadata: {
             name: 'SelectorClash',
-            description: 'Function Selector Collision Detector on Botchain Testnet',
+            description: 'Function Selector Collision Detector on Botchain Mainnet',
             url: window.location.origin,
-            icons: ['https://scan.bohr.life/favicon.ico'],
+            icons: ['https://scan.botchain.ai/favicon.ico'],
           },
           themeMode: 'dark',
           themeVariables: {
@@ -78,9 +78,10 @@ function getOrCreateWagmiConfig(projectId: string) {
 
   // Fallback direct config
   globalWagmiConfig = createConfig({
-    chains: [botchainTestnet],
+    chains: [botchainMainnet, botchainTestnet],
     connectors: [injected()],
     transports: {
+      [botchainMainnet.id]: http('https://rpc.botchain.ai'),
       [botchainTestnet.id]: http('https://rpc.bohr.life'),
     },
     ssr: true,
@@ -149,7 +150,7 @@ export function Web3Provider({
       try {
         const adapter = new WagmiAdapter({
           projectId: reownId,
-          networks: [botchainTestnet as any],
+          networks: [botchainMainnet as any, botchainTestnet as any],
           connectors: [
             injected(),
             walletConnect({ projectId: reownId, showQrModal: false }),
@@ -159,13 +160,13 @@ export function Web3Provider({
 
         globalAppKitInstance = createAppKit({
           adapters: [adapter],
-          networks: [botchainTestnet as any],
+          networks: [botchainMainnet as any, botchainTestnet as any],
           projectId: reownId,
           metadata: {
             name: 'SelectorClash',
-            description: 'Function Selector Collision Detector on Botchain Testnet',
+            description: 'Function Selector Collision Detector on Botchain Mainnet',
             url: window.location.origin,
-            icons: ['https://scan.bohr.life/favicon.ico'],
+            icons: ['https://scan.botchain.ai/favicon.ico'],
           },
           themeMode: 'dark',
           themeVariables: {

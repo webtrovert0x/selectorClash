@@ -8,7 +8,7 @@ import { ExtractedSelector, SelectorCollision } from '../utils/selectorExtractor
 
 export function DiamondInspector() {
   const [diamondAddress, setDiamondAddress] = useState('');
-  const [rpcUrl, setRpcUrl] = useState('https://rpc.bohr.life');
+  const [rpcUrl, setRpcUrl] = useState('https://rpc.botchain.ai');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<DiamondInspectionResult | null>(null);
   const [showRecordModal, setShowRecordModal] = useState(false);
@@ -71,7 +71,7 @@ export function DiamondInspector() {
           </h2>
         </div>
         <p className="text-xs text-zinc-400 mb-4">
-          Query on-chain Diamond contracts via IDiamondLoupe on Botchain Testnet to detect facet routing overlap and selector collisions.
+          Query on-chain Diamond contracts via IDiamondLoupe on Botchain Mainnet to detect facet routing overlap and selector collisions.
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -90,7 +90,7 @@ export function DiamondInspector() {
               type="text"
               value={rpcUrl}
               onChange={(e) => setRpcUrl(e.target.value)}
-              placeholder="RPC URL (default: https://rpc.bohr.life)"
+              placeholder="RPC URL (default: https://rpc.botchain.ai)"
               className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-xs font-mono text-zinc-400 focus:outline-none focus:border-zinc-600"
             />
           </div>
@@ -210,12 +210,17 @@ export function DiamondInspector() {
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-mono text-zinc-500">Facet #{idx + 1}:</span>
                         <a
-                          href={`https://scan.bohr.life/address/${facet.facetAddress}`}
+                          href={`https://scan.botchain.ai/address/${facet.facetAddress}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="font-mono text-xs text-zinc-200 hover:text-zinc-100 flex items-center gap-1 underline"
+                          className="font-mono text-xs text-zinc-200 hover:text-zinc-100 flex items-center gap-1.5 underline"
                         >
-                          {facet.facetAddress}
+                          <img
+                            src="/botchain-logo.png"
+                            alt="BotchainScan"
+                            className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                          />
+                          <span>{facet.facetAddress}</span>
                           <ExternalLink className="w-3 h-3 text-zinc-500" />
                         </a>
                       </div>

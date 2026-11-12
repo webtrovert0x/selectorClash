@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAccount, useDisconnect, useBalance, useConnect, useSwitchChain } from 'wagmi';
 import { useAppConfig } from '../context/Web3Provider';
 import { ShieldAlert, ExternalLink, Zap, AlertTriangle, Loader2 } from 'lucide-react';
-import { botchainTestnet } from '../config/botchain';
+import { botchainMainnet } from '../config/botchain';
 
 export function Header() {
   const { address, isConnected, chain } = useAccount();
@@ -19,13 +19,13 @@ export function Header() {
 
   const { data: balance } = useBalance({
     address: address || undefined,
-    chainId: botchainTestnet.id,
+    chainId: botchainMainnet.id,
     query: {
       enabled: Boolean(isMounted && address),
     },
   });
 
-  const isWrongChain = isConnected && chain && chain.id !== botchainTestnet.id;
+  const isWrongChain = isConnected && chain && chain.id !== botchainMainnet.id;
 
   const [showConnectMenu, setShowConnectMenu] = useState(false);
 
@@ -79,8 +79,12 @@ export function Header() {
           
           {/* Logo & Network Tag */}
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-zinc-900 border border-zinc-700/80 rounded-lg text-zinc-100 flex items-center justify-center">
-              <ShieldAlert className="w-6 h-6 text-zinc-100" />
+            <div className="w-10 h-10 rounded-xl overflow-hidden border border-zinc-700/80 bg-zinc-950 flex items-center justify-center p-1 shadow-md">
+              <img
+                src="/selectorclash-logo.svg"
+                alt="SelectorClash Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -99,19 +103,30 @@ export function Header() {
 
           {/* Network & Contract Banner */}
           <div className="flex flex-wrap items-center gap-2.5">
-            {/* Botchain Testnet Badge */}
+            {/* Botchain Mainnet Badge */}
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-zinc-900/90 border border-zinc-800 text-xs text-zinc-300">
+              <img
+                src="/botchain-logo.png"
+                alt="Botchain"
+                className="w-4 h-4 rounded-full object-contain"
+              />
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="font-medium text-zinc-200">Botchain Testnet</span>
-              <span className="text-zinc-500 font-mono">ID: 968</span>
+              <span className="font-medium text-zinc-200">Botchain Mainnet</span>
+              <span className="text-zinc-500 font-mono">ID: 677</span>
               <a
-                href="https://scan.bohr.life"
+                href="https://scan.botchain.ai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-zinc-400 hover:text-zinc-200 transition-colors"
-                title="Open BohrScan Explorer"
+                className="text-zinc-400 hover:text-zinc-200 transition-colors flex items-center gap-1 ml-1"
+                title="Open BotchainScan Official Explorer"
               >
-                <ExternalLink className="w-3.5 h-3.5" />
+                <img
+                  src="/botchain-logo.png"
+                  alt="BotchainScan"
+                  className="w-3.5 h-3.5 rounded-full object-contain inline-block"
+                />
+                <span>BotchainScan</span>
+                <ExternalLink className="w-3 h-3" />
               </a>
             </div>
 
@@ -123,10 +138,15 @@ export function Header() {
 
             {/* Contract Registry Address Pill */}
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900/90 border border-zinc-800 text-xs font-mono">
+              <img
+                src="/botchain-logo.png"
+                alt="Botchain"
+                className="w-3.5 h-3.5 rounded-full object-contain"
+              />
               <span className="text-zinc-500">Registry:</span>
               {contractAddress ? (
                 <a
-                  href={`https://scan.bohr.life/address/${contractAddress}`}
+                  href={`https://scan.botchain.ai/address/${contractAddress}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-zinc-300 hover:text-zinc-100 underline decoration-zinc-700 transition-colors"
@@ -146,12 +166,17 @@ export function Header() {
             {/* Network Switcher (if on wrong network) */}
             {isWrongChain && (
               <button
-                onClick={() => switchChain?.({ chainId: botchainTestnet.id })}
+                onClick={() => switchChain?.({ chainId: botchainMainnet.id })}
                 disabled={isSwitching}
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-950/80 hover:bg-amber-900/80 border border-amber-800 rounded-md text-xs font-mono text-amber-300 transition-colors"
               >
+                <img
+                  src="/botchain-logo.png"
+                  alt="Botchain"
+                  className="w-3.5 h-3.5 rounded-full object-contain"
+                />
                 <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-                <span>Switch to Botchain (968)</span>
+                <span>Switch to Botchain Mainnet (677)</span>
               </button>
             )}
 
